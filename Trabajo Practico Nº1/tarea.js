@@ -136,14 +136,13 @@ function verTareas() {
     console.clear();
   }
 }
-
+/*                                                                                IGNORAR/EN PROCESO
 function eliminarTarea() {
   console.clear();
   if (cantidadTareas === 0) {
     console.log("No hay tareas para eliminar.\n");
     return;
   }
-
   console.log("\n---Eliminador de tareas---\n");
   for (let j = 0; j < cantidadTareas; j++) {
     console.log(`${j + 1}. ${listaTareas[j].titulo}`);
@@ -185,7 +184,7 @@ function editarTarea() {
   } else {
     console.log("Número inválido.");
   }
-}
+}*/
 
 // MAIN
 function main() {
@@ -194,22 +193,18 @@ function main() {
     console.log("\n--- MENU PRINCIPAL ---");
     console.log("1. Crear tarea");
     console.log("2. Ver mis tareas");
-    console.log("3. Editar tarea");
-    console.log("4. Eliminar tarea");
     console.log("0. Salir");
     opc = parseInt(prompt("Seleccione una opción: "));
 
     switch (opc) {
-      case 0: console.log("\n Gracias por llamarme para nada!"); break;
+      case 0: console.log("\n Nos vemos!"); break;
       case 1: crearTarea(); break;
       case 2: verTareas(); break;
-      case 3: editarTarea(); break;
-      case 4: eliminarTarea(); break;
       default: console.log("Opción inválida. Intente nuevamente.");
     }
   } while (opc !== 0);
 
-  console.log("Matate!");
+  console.log("Adios!");
 }
 
 main();
