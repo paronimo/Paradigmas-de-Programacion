@@ -12,15 +12,19 @@ function main() {
                 break;
             case 1:
                 suma();
+                pausa();
                 break;
             case 2:
                 resta();
+                pausa();
                 break;
             case 3:
                 multiplicacion();
+                pausa();
                 break;
             case 4:
                 division();
+                pausa();
                 break;
             default:
                 console.log("Opción inválida. Intente nuevamente.");
@@ -29,7 +33,10 @@ function main() {
 
     console.log("Chao!");
 }
-
+function pausa() {
+  prompt("Presiona ENTER para continuar...");
+  console.clear();
+}
 function suma() {
     const a = parseFloat(prompt("Ingrese su primer número: "));
     const b = parseFloat(prompt("Ingrese su segundo número: "));
