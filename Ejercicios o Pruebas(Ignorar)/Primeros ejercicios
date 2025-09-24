@@ -1,8 +1,0 @@
-/*Holaaaaa
-como se supone que hago los comentarios? Asi?Chochooo*/
-//hol
-let a=5
-let b=10
-let c=a * b
-console.log("Hola mundo");
-console.log("HOla el resultado "+c)
