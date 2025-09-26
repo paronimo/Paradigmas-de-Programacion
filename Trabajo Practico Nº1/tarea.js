@@ -32,27 +32,21 @@ function crearTarea() {
     console.clear();
   } else {
     console.log("Tarea cancelada. Puedes volver a crearla.");
-    console.clear();
-  }
-}
+    console.clear();}}
 
 function pedirTitulo(t) {
-  t.titulo = prompt("De un titulo a esta tarea: ");
-}
+  t.titulo = prompt("De un titulo a esta tarea: ");}
 
 function pedirDescripcion(t) {
-  t.descripcion = prompt("De una descripcion a esta tarea: ");
-}
+  t.descripcion = prompt("De una descripcion a esta tarea: ");}
 
 function pedirDificultad(t) {
-  do {
-    console.log("\n1 = § = Facilisimo\n2 = §§ = Facil\n3 = §§§ = Medio\n4 = §§§§ = Complicado\n5 = §§§§§ = Dificilisimo");
+  do {console.log("\n1 = § = Facilisimo\n2 = §§ = Facil\n3 = §§§ = Medio\n4 = §§§§ = Complicado\n5 = §§§§§ = Dificilisimo");
     t.dificultad = parseInt(prompt("Seleccione su dificultad: "));
     if (t.dificultad < 1 || t.dificultad > 5) {
       console.log("?? ¡Seleccione un número entre 1 y 5!\n");
     }
-  } while (t.dificultad < 1 || t.dificultad > 5);
-}
+  } while (t.dificultad < 1 || t.dificultad > 5);}
 
 function pedirEstado(t) {
   let estadoSeleccionado;
@@ -61,15 +55,12 @@ function pedirEstado(t) {
   estadoSeleccionado = parseInt(prompt("Seleccione: "));
 
   while (estadoSeleccionado < 1 || estadoSeleccionado > 3) {
-    estadoSeleccionado = parseInt(prompt(" Opción inválida. Intente nuevamente: "));
-  }
+    estadoSeleccionado = parseInt(prompt(" Opción inválida. Intente nuevamente: "));}
 
   switch (estadoSeleccionado) {
     case 1: t.estado = "Pendiente"; break;
     case 2: t.estado = "En curso"; break;
-    case 3: t.estado = "Terminada"; break;
-  }
-}
+    case 3: t.estado = "Terminada"; break;}}
 
 function pedirFechaVencimiento(t) {
   let confirm;
@@ -83,14 +74,11 @@ function pedirFechaVencimiento(t) {
 
       if (t.dia > 31 || t.dia <= 0 || t.mes > 12 || t.mes <= 0 || t.anio < 2025) {
         console.log("Fecha invalida. Intente de nuevo.\n");
-        continue;
-      }
+        continue;}
 
       console.log(`...${t.dia}/${t.mes}/${t.anio}... ¿Es su fecha final?`);
       confirm = parseInt(prompt("SI(1) NO(2): "));
-    } while (confirm !== 1);
-  }
-}
+    } while (confirm !== 1);}}
 
 function mostrarResumen(t) {
   console.log("\n¿Estos son todos los datos ingresados?");
@@ -123,88 +111,118 @@ function mostrarResumen(t) {
 
 function verTareas() {
   console.clear();
-  if (cantidadTareas === 0) {
-    console.log("No hay tareas para mostrar.\n");
-    return;
-  }
-
+  let opciones;
+  do {
   console.log("\n--- LISTA DE TAREAS ---\n");
-  for (let i = 0; i < cantidadTareas; i++) {
-    console.log(`\nTarea Nº${i + 1}:`);
-    mostrarResumen(listaTareas[i]);
+   console.log("\n¿Que tareas deseas ver?");
+    console.log("\n(0)Volver\n(1)Todas\n(2)Pendientes\n(3)En Curso\n(4)Terminada");
+    opciones = parseInt(prompt("Seleccione una opción: "));
+
+    switch (opciones) {
+      case 0:
+        console.clear();
+        return; 
+      case 1:
+        nht();
+        for (let i = 0; i < cantidadTareas; i++) {
+        console.log(`\n--- Todas las tareas ---\n${i + 1}:`);
+        mostrarResumen(listaTareas[i]); } 
+        break;
+      case 2: nht(); VerTP(); break;
+      case 3:
+        nht(); VerTEC(); break;
+      case 4:
+        nht(); VerTT(); break;
+      default:
+        console.log("Opción inválida. Intente nuevamente.");
+    }
     prompt("Presiona ENTER para continuar...");
     console.clear();
-  }
+  }while(opciones !==0);
+ console.clear();
 }
-/*                                                                                IGNORAR/EN PROCESO
-function eliminarTarea() {
+function VerTP() {
+  for (let i = 0; i < cantidadTareas; i++) {
+          if (listaTareas[i].estado === "Pendiente") {
+            console.log("\n--- Tareas Pendientes ---\n");
+            mostrarResumen(listaTareas[i]);}}}
+function VerTEC() {
+  for (let i = 0; i < cantidadTareas; i++) {
+          if (listaTareas[i].estado === "En curso") {
+            console.log("\n--- Tareas En Curso ---\n");
+            mostrarResumen(listaTareas[i]);}}}
+function VerTT() {
+   for (let i = 0; i < cantidadTareas; i++) {
+          if (listaTareas[i].estado === "Terminada") {
+            console.log("\n--- Tareas Terminadas ---\n");
+            mostrarResumen(listaTareas[i]);}}}
+ function nht() {
+  if (cantidadTareas === 0) {
+    console.log("No hay tareas para mostrar.\n");
+    return;}}
+   function buscarTarea() {
   console.clear();
   if (cantidadTareas === 0) {
-    console.log("No hay tareas para eliminar.\n");
+    console.log("No hay tareas registradas.\n");
     return;
   }
-  console.log("\n---Eliminador de tareas---\n");
-  for (let j = 0; j < cantidadTareas; j++) {
-    console.log(`${j + 1}. ${listaTareas[j].titulo}`);
-  }
-  let i = parseInt(prompt("Seleccione el número de tarea a eliminar: "));
-  i--;
+  console.log("\n--- BUSCAR TAREA ---\n");
+  for (let i = 0; i < cantidadTareas; i++) {
+    console.log(`${i + 1}. ${listaTareas[i].titulo}`);}
+  console.log("0. Volver");
+  let seleccion = parseInt(prompt("Ingrese el número de la tarea que desea ver: "));
 
-  if (i >= 0 && i < cantidadTareas) {
-    listaTareas.splice(i, 1);
-    cantidadTareas--;
-    console.log("Tarea eliminada con éxito!");
+  if (seleccion === 0) {
+    console.clear();
+    return;}
+  if (seleccion > 0 && seleccion <= cantidadTareas) {
+    console.clear();
+    mostrarResumen(listaTareas[seleccion - 1]);
   } else {
-    console.log("Número inválido.");
-  }
-}
-
+    console.log("Número inválido.");}
+  prompt("Presiona ENTER para continuar...");
+}                                                     
 function editarTarea() {
   console.clear();
   if (cantidadTareas === 0) {
     console.log("No hay tareas para editar.\n");
     return;
-  }
-
-  console.log("\n---Editor de Tarea---\n");
+    }
+console.log("\n--- EDITAR TAREA ---\n");
   for (let j = 0; j < cantidadTareas; j++) {
     console.log(`${j + 1}. ${listaTareas[j].titulo}`);
   }
+  console.log("0. Volver");
 
   let i = parseInt(prompt("Seleccione el número de tarea a editar: ")) - 1;
 
   if (i >= 0 && i < cantidadTareas) {
-    console.log(`Editando la tarea: ${listaTareas[i].titulo}`);
+    console.log(`\nEditando la tarea: ${listaTareas[i].titulo}\n`);
     pedirTitulo(listaTareas[i]);
     pedirDescripcion(listaTareas[i]);
     pedirDificultad(listaTareas[i]);
     pedirEstado(listaTareas[i]);
     pedirFechaVencimiento(listaTareas[i]);
-    console.log("Tarea editada con éxito!");
-  } else {
-    console.log("Número inválido.");
-  }
-}*/
-
-// MAIN
+    console.log("¡Tarea editada con éxito!");
+  } else if (i !== -1) {
+    console.log("Número inválido.");}
+  prompt("Presiona ENTER para continuar...");
+}
 function main() {
   let opc;
   do {
     console.log("\n--- MENU PRINCIPAL ---");
-    console.log("1. Crear tarea");
-    console.log("2. Ver mis tareas");
-    console.log("0. Salir");
+    console.log("0. Salir\n1. Crear tarea\n2. Ver mis tareas\n3. Buscar tarea\n4. Editar tarea\n____________________________________________");
     opc = parseInt(prompt("Seleccione una opción: "));
 
     switch (opc) {
       case 0: console.log("\n Nos vemos!"); break;
       case 1: crearTarea(); break;
       case 2: verTareas(); break;
+      case 3: buscarTarea(); break;
+      case 4: editarTarea(); break; 
       default: console.log("Opción inválida. Intente nuevamente.");
-    }
-  } while (opc !== 0);
-
+    }} while (opc !== 0);
   console.log("Adios!");
 }
-
 main();
